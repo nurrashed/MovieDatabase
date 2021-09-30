@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+/* import { BrowserRouter, Route, Switch } from "react-router-dom"; */
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header/Header";
+import SimpleBottomNavigation from "./components/MainNav/MainNav";
+import { Container } from "@mui/material";
+import TrendPage from "./Pages/TrendPage/TrendPage";
+import MoviePage from "./Pages/MoviePage/MoviePage";
+import SearchPage from "./Pages/SearchPage/SearchPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <div className="app">
+        <Container>
+          <Switch>
+            {/* <Route path="/" component={TrendPage} exact />
+            <Route path="/moviepage" component={MoviePage} />
+            <Route path="/searchpage" component={SearchPage} /> */}
+            <Route path="/" exact>
+              <TrendPage />
+            </Route>
+            <Route path="/moviepage">
+              <MoviePage />
+            </Route>
+            <Route path="/searchpage">
+              <SearchPage />
+            </Route>
+          </Switch>
+        </Container>
+      </div>
+      <SimpleBottomNavigation />
+    </Router>
   );
 }
 

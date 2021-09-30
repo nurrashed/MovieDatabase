@@ -1,0 +1,48 @@
+.media {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 5px;
+  margin: 5px 0;
+  background-color: #282c34;
+  border-radius: 4px;
+  position: relative;
+  font: inherit;
+  font-weight: 400;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.media:hover {
+  background-color: rgb(245, 236, 236);
+  color: black;
+}
+
+@media (max-width: 550px) {
+  .media {
+    width: 46%;
+  }
+}
+
+.poster {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  padding: .5rem 0;
+}
+
+.subTitle {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3px;  
+}
