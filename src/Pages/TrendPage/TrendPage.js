@@ -7,7 +7,7 @@ import classes from "./TrendPage.module.css";
 export default function TrendPage() {
   const [weeklyTrendMovies, setWeeklyTrendMovies] = useState([]);
   const [page, setPage] = useState(1);
-
+  
   const fetchTrendMovies = async () => {
     const { data } = await axios.get(
         `https://api.themoviedb.org/3/trending/movie/week?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false`
@@ -16,7 +16,9 @@ export default function TrendPage() {
   };
 
   useEffect(() => {
+    window.scroll(0, 0);
     fetchTrendMovies();
+    // eslint-disable-next-line
   }, [page]);
 
   return (
@@ -36,7 +38,7 @@ export default function TrendPage() {
             />
           ))}
       </div>
-      <CustomPagination setPage={setPage}/>
+      <CustomPagination setPage={setPage} />
     </>
   );
 }

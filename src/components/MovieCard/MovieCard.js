@@ -10,6 +10,7 @@ export default function MovieCard({
   overview,
   date,
   vote_average,
+  media_type
 }) {
   return (
     <div className={classes.media}>
@@ -22,5 +23,6 @@ export default function MovieCard({
       <b className={classes.title}>{title}</b>
       <div className={classes.subTitle}>{date}</div>
     </div>
+    
   );
 }
