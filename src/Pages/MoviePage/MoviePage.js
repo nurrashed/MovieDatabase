@@ -24,11 +24,9 @@ export default function MoviePage() {
 
   useEffect(() => {
     fetchMovies();
-    return () => {
-      setPage({});
-    };
+    
     // eslint-disable-next-line
-  }, [page, genreforURL]);
+  }, [genreforURL, page]);
 
   return (
     <>
