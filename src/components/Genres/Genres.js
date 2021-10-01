@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import classes from "./Genres.module.css";
 import { Chip } from "@material-ui/core";
-import axios from "axios";
 /* import Chip from '@mui/material/Chip'; */
 
 export default function Genres({
@@ -41,6 +41,7 @@ export default function Genres({
     return () => {
       setGenres({});
     };
+    // eslint-disable-next-line
   }, []);
 
   return (
