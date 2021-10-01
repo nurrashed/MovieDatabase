@@ -26,15 +26,15 @@ export default function SearchPage() {
     <>
       <div className="pageTitle">Search Page</div>
       <ThemeProvider theme={darkTheme}>
-        <div>
+        <div style={{display:'flex'}}>
           <TextField
-            style={{ flex: 1 }}
+            style={{ flex: 1 , backgroundColor:'gray'}}
             className={classes.searchBox}
             label="Search"
             variant="filled"
             // onChange = {e => setSearchText(e.target.value)}
           />
-          <Button variant='contained' style={{marginLeft: 10}}>
+          <Button variant='contained' style={{marginLeft: 10, backgroundColor:'#4d9ce8'}}>
             <SearchIcon />
           </Button>
         </div>
