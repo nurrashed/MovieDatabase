@@ -1,68 +1,140 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import TextField from '@mui/material/TextField';
-import CustomPagination from './../../components/Pagination/CustomPagination';
-import MovieCard from './../../components/MovieCard/MovieCard';
-import classes from "./SearchPage.module.css";
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
+import CustomPagination from "../../components/Pagination/CustomPagination";
 
 export default function SearchPage() {
-  const [type, setType] = useState(0);
+  /*   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
 
-  const darkTheme = createTheme({
-    palette: {
-      type: "dark",
-      primary: {
-        main: "#fff",
-      },
-    },
-  });
+  const Search_API = "https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&include_adult=false&query="
+
+  useEffect(()=>{
+    let isMounted = true; 
+    async function getData(){
+      const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&query=The%20summer&page=1&include_adult=false`)
+      if (isMounted) setMovies(data);
+    }
+    getData()
+    return () => { isMounted = false }; 
+  }, []) */
+
+  const [page, setPage] = useState(1);
+  const [movies, setMovies] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [selectedMovieId, setSelectedMovieId] = useState('');
+  const [overview, setOverview] = useState('');
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const Search_API =
+    `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=`;
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    setSearchText('');
+  };
+
+  
+  useEffect(() => {
+    window.scroll(0, 0);
+    fetch(Search_API+searchText)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data.results);
+      setMovies(data.results)
+    });
+    // eslint-disable-next-line
+  }, [page]);
+
+  const handleOnChange = (e) => {
+    setSearchText(e.target.value)
+
+    
+    fetch(Search_API+searchText)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.results);
+        setMovies(data.results)
+      });
+  }
+
+  const overviewShow = (e) => {
+    setSelectedMovieId(e.target.id)
+   //setOverview(e.target.overview)
+   setOverview(e.target.dataset.value)
+
+    //console.log(selectedMovieId);
+
+    getSimilarMovies(e.target.id);
+
+
+  }
+
+  console.log("selectedMovieId: ", selectedMovieId)
+  
+
+  const getSimilarMovies = (selectedMovieId) => {
+    fetch(`https://api.themoviedb.org/3/movie/${selectedMovieId}/similar?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=1`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Similar Movie List:", data.results)
+        setSimilarMovies(data.results)
+      })
+  }
+
+  const clearScreen = () => {
+    setOverview('');
+    setSimilarMovies([]);
+  }
+
 
   return (
-    <>
-      <div className="pageTitle">Search Page</div>
-      <ThemeProvider theme={darkTheme}>
-        <div style={{display:'flex'}}>
-          <TextField
-            style={{ flex: 1 , backgroundColor:'gray'}}
-            className={classes.searchBox}
-            label="Search"
-            variant="filled"
-            // onChange = {e => setSearchText(e.target.value)}
-          />
-          <Button variant='contained' style={{marginLeft: 10, backgroundColor:'#4d9ce8'}}>
-            <SearchIcon />
-          </Button>
-        </div>
-      </ThemeProvider>
-    </>
+    <div>
+      <form onSubmit={handleOnSubmit}>
+        <input 
+          type="text" 
+          placeholder="Search Movie" 
+          value={searchText}
+          onChange={handleOnChange}
+        />
+      </form>
+      <div>
+        <ul>
+          {movies &&  movies.map((movie) => (
+            <li key={movie.id} id={movie.id} data-value={movie.overview} onClick={overviewShow}>
+              {movie.title}
+            </li>            
+          ))}
+        </ul>
+      </div>
+      <div>{overview && overview}</div>
+
+      <div>{similarMovies && similarMovies.map((similarMovie) => (
+        
+          <div key={similarMovie.id}>{similarMovie.title}</div>
+        
+      ))}</div>
+
+      <button onClick={clearScreen}>Clear</button>
+      <CustomPagination setPage={setPage} />
+    </div>
   );
 }
 
-
-
 /* import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import TextField from '@mui/material/TextField';
-import CustomPagination from './../../components/Pagination/CustomPagination';
-import MovieCard from './../../components/MovieCard/MovieCard';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 import classes from "./SearchPage.module.css";
-import FindInPageIcon from '@mui/icons-material/FindInPage';
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import CustomPagination from "./../../components/Pagination/CustomPagination";
+import MovieCard from "./../../components/MovieCard/MovieCard";
 
-const SearchPage = () => {
-  const [type, setType] = useState(0); 
+export default function SearchPage() {
   const [searchText, setSearchText] = useState("");
+  const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  const [content, setContent] = useState([]);
-  const [numOfPages, setNumOfPages] = useState();
+  const [numberOfPages, setNumberOfPages] = useState();
+  const [filteredOutput, setFilteredOutput] = useState([]);
 
   const darkTheme = createTheme({
     palette: {
@@ -78,9 +150,8 @@ const SearchPage = () => {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       );
-      setContent(data.results);
-      setNumOfPages(data.total_pages);
-      // console.log(data);
+      setMovies(data.results);
+      setNumberOfPages(data.total_pages);
     } catch (error) {
       console.error(error);
     }
@@ -90,15 +161,20 @@ const SearchPage = () => {
     window.scroll(0, 0);
     fetchSearch();
     // eslint-disable-next-line
-  }, [type,page]);
+    return () => {
+      // This is its cleanup.
+      setMovies({});
+    };
+  }, [page]);
 
   return (
-    <div>
+    <>
+      <div className="pageTitle">Search Page</div>
       <ThemeProvider theme={darkTheme}>
-        <div className={classes.search}>
+        <div style={{ display: "flex", margin: "1rem 0" }}>
           <TextField
-            style={{ flex: 1 }}
-            className="searchBox"
+            style={{ flex: 1, backgroundColor: "gray" }}
+            className={classes.searchBox}
             label="Search"
             variant="filled"
             onChange={(e) => setSearchText(e.target.value)}
@@ -106,48 +182,29 @@ const SearchPage = () => {
           <Button
             onClick={fetchSearch}
             variant="contained"
-            style={{ marginLeft: 10 }}
+            style={{ marginLeft: 10, backgroundColor: "#4d9ce8" }}
           >
-            <FindInPageIcon fontSize="large" />
+            <SearchIcon />
           </Button>
         </div>
-        <Tabs
-          value={type}
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={(event, newValue) => {
-            //setType(newValue);
-            setPage(1);
-          }}
-          style={{ paddingBottom: 5 }}
-          aria-label="disabled tabs example"
-        >
-          <Tab style={{ width: "50%" }} label="Search Movies" />
-          <Tab style={{ width: "50%" }} label="Search TV Series" />
-        </Tabs>
       </ThemeProvider>
-      <div className="trending">
-        {content &&
-          content.map((c) => (
+      <div className={classes.search}>
+        {movies &&
+          movies.map((movie) => (
             <MovieCard
-              key={c.id}
-              id={c.id}
-              poster={c.poster_path}
-              title={c.title || c.name}
-              date={c.first_air_date || c.release_date}
-              //media_type={type ? "tv" : "movie"}
-              vote_average={c.vote_average}
+              key={movie.id}
+              id={movie.id}
+              poster={movie.poster_path}
+              title={movie.title}
+              date={movie.release_date}
+              vote_average={movie.vote_average}
             />
           ))}
-        {searchText &&
-          !content &&
-          <h2>No Movies Found</h2>}
+        {searchText && !movies && <h2>No Movies Found</h2>}
       </div>
-      {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
+      {numberOfPages > 1 && (
+        <CustomPagination setPage={setPage} numberOfPages={numberOfPages} />
       )}
-    </div>
+    </>
   );
-};
-
-export default SearchPage; */
+} */
