@@ -1,118 +1,99 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 
 export default function SearchPage() {
-  /*   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
-
-  const Search_API = "https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&include_adult=false&query="
-
-  useEffect(()=>{
-    let isMounted = true; 
-    async function getData(){
-      const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&query=The%20summer&page=1&include_adult=false`)
-      if (isMounted) setMovies(data);
-    }
-    getData()
-    return () => { isMounted = false }; 
-  }, []) */
-
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [selectedMovieId, setSelectedMovieId] = useState('');
-  const [overview, setOverview] = useState('');
+  const [selectedMovieId, setSelectedMovieId] = useState("");
+  const [overview, setOverview] = useState("");
   const [similarMovies, setSimilarMovies] = useState([]);
-  const Search_API =
-    `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=`;
+  const Search_API = `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=`;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    setSearchText('');
+    setSearchText("");
   };
 
-  
   useEffect(() => {
     window.scroll(0, 0);
-    fetch(Search_API+searchText)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data.results);
-      setMovies(data.results)
-    });
+
+    fetch(Search_API + searchText)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.results);
+        setMovies(data.results);
+      });
     // eslint-disable-next-line
   }, [page]);
 
   const handleOnChange = (e) => {
-    setSearchText(e.target.value)
+    setSearchText(e.target.value);
 
-    
-    fetch(Search_API+searchText)
+    fetch(Search_API + searchText)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.results);
-        setMovies(data.results)
+        setMovies(data.results);
       });
-  }
+  };
 
   const overviewShow = (e) => {
-    setSelectedMovieId(e.target.id)
-   //setOverview(e.target.overview)
-   setOverview(e.target.dataset.value)
+    setSelectedMovieId(e.target.id);
 
-    //console.log(selectedMovieId);
+    setOverview(e.target.dataset.value);
 
     getSimilarMovies(e.target.id);
-
-
-  }
-
-  console.log("selectedMovieId: ", selectedMovieId)
-  
+  };
 
   const getSimilarMovies = (selectedMovieId) => {
-    fetch(`https://api.themoviedb.org/3/movie/${selectedMovieId}/similar?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=1`)
+    fetch(
+      `https://api.themoviedb.org/3/movie/${selectedMovieId}/similar?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=1`
+    )
       .then((res) => res.json())
       .then((data) => {
-        console.log("Similar Movie List:", data.results)
-        setSimilarMovies(data.results)
-      })
-  }
+        console.log("Similar Movie List:", data.results);
+        setSimilarMovies(data.results);
+      });
+  };
 
   const clearScreen = () => {
-    setOverview('');
+    setOverview("");
     setSimilarMovies([]);
-  }
-
+  };
 
   return (
     <div>
       <form onSubmit={handleOnSubmit}>
-        <input 
-          type="text" 
-          placeholder="Search Movie" 
+        <input
+          type="text"
+          placeholder="Search Movie"
           value={searchText}
           onChange={handleOnChange}
         />
       </form>
       <div>
         <ul>
-          {movies &&  movies.map((movie) => (
-            <li key={movie.id} id={movie.id} data-value={movie.overview} onClick={overviewShow}>
-              {movie.title}
-            </li>            
-          ))}
+          {movies &&
+            movies.map((movie) => (
+              <li
+                key={movie.id}
+                id={movie.id}
+                data-value={movie.overview}
+                onClick={overviewShow}
+              >
+                {movie.title}
+              </li>
+            ))}
         </ul>
       </div>
       <div>{overview && overview}</div>
-
-      <div>{similarMovies && similarMovies.map((similarMovie) => (
-        
-          <div key={similarMovie.id}>{similarMovie.title}</div>
-        
-      ))}</div>
-
+      <div>
+        {similarMovies &&
+          similarMovies.map((similarMovie) => (
+            <div key={similarMovie.id}>{similarMovie.title}</div>
+          ))}
+      </div>
       <button onClick={clearScreen}>Clear</button>
       <CustomPagination setPage={setPage} />
     </div>
