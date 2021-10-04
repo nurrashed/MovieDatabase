@@ -27,10 +27,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     window.scroll(0, 0);
-    searchMovies(Search_API, searchText);
-    return () => {
-      setSearchText({}); // This worked for me
-    };
+    searchMovies(Search_API, searchText);    
     // eslint-disable-next-line
   }, [page]);
 
@@ -40,15 +37,19 @@ export default function SearchPage() {
   };
 
   const overviewShow = (e) => {
+    window.scroll(0, 0);
     setSelectedMovieId(e.target.id);
     setOverview(e.target.dataset.value);
     getSimilarMovies(e.target.id);
-    movies.forEach((movie) => {
+
+    /* movies.forEach((movie) => {
       if (parseInt(e.currentTarget.id) === movie.id) {
         e.currentTarget.classList.add("listitem");
       }
-    });
+    }); */
   };
+
+  console.log(selectedMovieId);
 
   const getSimilarMovies = (selectedMovieId) => {
     fetch(
@@ -81,7 +82,7 @@ export default function SearchPage() {
                 />
               </form>
             </div>
-            <div className={classes["movie-container"]} id={"movie-C"}>
+            <div className={classes["movie-container"]}>
               {movies &&
                 movies.map((movie) => (
                   <div
