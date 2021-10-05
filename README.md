@@ -21,7 +21,7 @@ The application includes the following features:
 
 - [Repo](https://github.com/nurrashed/MovieDatabase "MovieDatabase Repo")
 
-- [Live](<Homepage url> "Live View")
+- [Live](https://mymoviesearchapp.netlify.app/ "Live View")
 
 - [Bugs](https://github.com/Rohit19060/<project-name>/issues "Issues Page")
 
