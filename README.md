@@ -19,7 +19,7 @@ The application includes the following features:
 
 ## Links
 
-- [Repo](https://github.com/nurrashed/<MovieDatabase> "<MovieDatabase> Repo")
+- [Repo](https://github.com/nurrashed/MovieDatabase "MovieDatabase Repo")
 
 - [Live](<Homepage url> "Live View")
 
