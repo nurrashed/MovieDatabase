@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+## Project Name: Movie Search APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description: 
 
-## Available Scripts
+I developed a SPA (Single Page Application) with React Js, which allows the users to search for movies.  
+
+The application includes the following features: 
+- User can see all trendy movies. This trendy movie page is the home page of this app.
+- Movie page where user can see all the movies. In this page user can also sort movies according to genre. User also can select multiple genres at the same time.  
+- The user can be able to search for movies by any text. 
+- User can select the movie name from the list, which will load information in the right panel. 
+- An overview of the movie will be shown in the Overview panel and, a list of similar movies will be shown in the Similar movies panel.  
+- User can see the background color change of the movie he/she upon movie selected from the left panel list. 
+- User can see the current page number and total page number in the bottom of the page  
+- All the pages have Pagination facility. 
+- App has routing facility. 
+
+
+
+## Links
+
+- [Repo](https://github.com/nurrashed/<MovieDatabase> "<MovieDatabase> Repo")
+
+- [Live](<Homepage url> "Live View")
+
+- [Bugs](https://github.com/Rohit19060/<project-name>/issues "Issues Page")
+
+- [API](<API Link> "API")
+
+## Screenshots
+
+![Home Page](/screenshots/1.png "Home Page")
+
+![](/screenshots/2.png)
+
+![](/screenshots/3.png)
+
+## Available Commands
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm start" : "react-scripts start"`,
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
+The app is built using `create-react-app` so this command Runs the app in Development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. You also need to run the server file as well to completely run the app. The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-### `yarn test`
+### `"npm run build": "react-scripts build"`,
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app will be ready to deploy!
 
-### `yarn build`
+### `"npm run test": "react-scripts test"`,
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Launches the test runner in the interactive watch mode.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `"npm run dev": "concurrently "nodemon server" "npm run start"`,
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For running the server and app together I am using concurrently this helps a lot in the MERN application as it runs both the server (client and server) concurrently. So you can work on them both together.
 
-### `yarn eject`
+### `"serve": "node server"`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+For running the server file on you can use this command.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `npm run serve`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Built With
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- JavaScript
+- Node
+- NPM
+- Webpack
+- HTML
+- CSS
 
-## Learn More
+## Future Updates
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [ ] Reliable Storage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Author
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Rohit Jain**
