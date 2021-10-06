@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+## Project Name: Movie Search APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description: 
 
-## Available Scripts
+I developed a SPA (Single Page Application) with React Js, which allows the users to search for movies.  
 
-In the project directory, you can run:
+The application includes the following features: 
+- User can see all trendy movies. This trendy movie page is the home page of this app.
+- Movie page where user can see all the movies. In this page user can also sort movies according to genre. User also can select multiple genres at the same time.  
+- The user can be able to search for movies by any text. 
+- User can select the movie name from the list, which will load information in the right panel. 
+- An overview of the movie will be shown in the Overview panel and, a list of similar movies will be shown in the Similar movies panel.  
+- User can see the background color change of the movie upon selecting it from left side panel. 
+- User can see the current page number and total page number in the bottom of the page  
+- All the pages have Pagination facility. 
+- App has routing facility. 
+- App is full responsive
 
-### `yarn start`
+## Links
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Repo](https://github.com/nurrashed/MovieDatabase "MovieDatabase Repo")
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [Live](https://mymoviesearchapp.netlify.app/ "Live View")
 
-### `yarn test`
+- [API](https://developers.themoviedb.org/3/getting-started/introduction "API")
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to run this app at your local machine
 
-### `yarn build`
+- Step 1: Run the following command in command prompt in your desired folder:-  git clone https://github.com/nurrashed/MovieDatabase.git 
+- Step 2: run the follwing command in command prompt in your desired folder(where you just cloned MovieDatabase):-  cd .\MovieDatabase.
+- Step 3: run the follwing command in command prompt:- npm install
+- Step 4: run the follwing command in command prompt:- npm start 
+- 
+## This app is Built With
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- JavaScript(React)
+- HTML
+- CSS
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Limitations and Future Plan
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Will try to implement this app using TypeScript. Could not do this due to limited time. 
+- Right now user can see the background color change of the movie upon selecting it from left side panel. But it disappear immediately. I will try to make the background fixed until user select next movie from the list.   
 
-### `yarn eject`
+## Author
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Nur Mohammad Rashed**
