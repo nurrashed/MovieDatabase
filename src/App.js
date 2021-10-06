@@ -15,9 +15,6 @@ function App() {
       <div className="app">
         <Container>
           <Switch>
-            {/* <Route path="/" component={TrendPage} exact />
-            <Route path="/moviepage" component={MoviePage} />
-            <Route path="/searchpage" component={SearchPage} /> */}
             <Route path="/" exact>
               <TrendPage />
             </Route>

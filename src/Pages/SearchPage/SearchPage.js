@@ -10,18 +10,22 @@ export default function SearchPage() {
   const [selectedMovieId, setSelectedMovieId] = useState("");
   const [overview, setOverview] = useState("");
   const [similarMovies, setSimilarMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const Search_API = `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=`;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
+    searchMovies(Search_API, searchText);
     setSearchText("");
   };
 
   const searchMovies = (Search_API, searchText) => {
+    setIsLoading(true);
     fetch(Search_API + searchText)
-      .then((res) => res.json())
+      .then((res) => {return res.json()})
       .then((data) => {
         setMovies(data.results);
+        setIsLoading(false);
       });
   };
 
@@ -33,7 +37,7 @@ export default function SearchPage() {
 
   const handleOnChange = (e) => {
     setSearchText(e.target.value);
-    searchMovies(Search_API, searchText);
+    /* searchMovies(Search_API, searchText); */
   };
 
   const overviewShow = (e) => {
@@ -83,7 +87,7 @@ export default function SearchPage() {
               </form>
             </div>
             <div className={classes["movie-container"]}>
-              {movies &&
+              {!isLoading && movies  &&
                 movies.map((movie) => (
                   <div
                     key={movie.id}
@@ -94,6 +98,8 @@ export default function SearchPage() {
                     {movie.title}
                   </div>
                 ))}
+                {!isLoading && <p>Found no movies</p>}
+                {isLoading && <p>Loading....</p>}
             </div>
           </div>
         </div>

@@ -12,14 +12,17 @@ export default function MoviePage() {
   const [numberOfPages, setNumberOfPages] = useState();
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
   const genreforAPICall = useGenre(selectedGenres)
 
   const fetchMovies = async () => {
+    setIsLoading(true)
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforAPICall}`
     );
     setAllMovies(data.results);
     setNumberOfPages(data.total_pages);
+    setIsLoading(false)
   };
 
   useEffect(() => {
@@ -41,7 +44,7 @@ export default function MoviePage() {
           setPage={setPage}
         />
       }
-      <div className={classes.movie}>
+      {!isLoading && <div className={classes.movie}>
         {allMovies &&
           allMovies.map((movie) => (
             <MovieCard
@@ -54,7 +57,8 @@ export default function MoviePage() {
               vote_average={movie.vote_average}
             />
           ))}
-      </div>
+      </div>}
+      {isLoading && <h1>Loading...</h1>}
       {numberOfPages > 1 && (
         <CustomPagination setPage={setPage} numberOfPages={numberOfPages} />
       )}
