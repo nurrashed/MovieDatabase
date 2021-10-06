@@ -19,14 +19,13 @@ export default function SearchPage() {
     setSearchText("");
   };
 
-  const searchMovies = (Search_API, searchText) => {
+  const searchMovies = async (Search_API, searchText) => {
+    
     setIsLoading(true);
-    fetch(Search_API + searchText)
-      .then((res) => {return res.json()})
-      .then((data) => {
-        setMovies(data.results);
-        setIsLoading(false);
-      });
+    const response = await fetch(Search_API + searchText);
+    const data = await response.json();  
+    setMovies(data.results);
+    setIsLoading(false);   
   };
 
   useEffect(() => {
@@ -98,31 +97,31 @@ export default function SearchPage() {
                     {movie.title}
                   </div>
                 ))}
-                {!isLoading && <p>Found no movies</p>}
                 {isLoading && <p>Loading....</p>}
             </div>
           </div>
         </div>
         <div className={classes["right-side"]}>
+        <h3>Movie Overview</h3>
           {overview && (
             <div className={classes["overview"]}>
-              <h3>Overview</h3>
               {overview}
             </div>
           )}
-          {overview && (
+          {!overview && <p>No overview to show!</p>}
+
+          <h3>Similar Movies</h3>
+          {similarMovies.length > 0 && (
             <div className={classes["similar-movie"]}>
-              <h3>Similar Movies</h3>
               {similarMovies.map((similarMovie) => (
                 <div key={similarMovie.id}>{similarMovie.title}</div>
               ))}
             </div>
           )}
-          {overview && (
+          {similarMovies.length === 0 && <p>No Similar movies found</p>}
             <button onClick={clearScreen}>
               Clear Overview and similar movie list
             </button>
-          )}
         </div>
       </div>
       {<CustomPagination setPage={setPage} />}
