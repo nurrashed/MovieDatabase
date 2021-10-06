@@ -15,7 +15,7 @@ export default function SearchPage() {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    searchMovies(Search_API, searchText);
+    /* searchMovies(Search_API, searchText); */
     setSearchText("");
   };
 
@@ -36,7 +36,7 @@ export default function SearchPage() {
 
   const handleOnChange = (e) => {
     setSearchText(e.target.value);
-    /* searchMovies(Search_API, searchText); */
+    searchMovies(Search_API, searchText);
   };
 
   const overviewShow = (e) => {
