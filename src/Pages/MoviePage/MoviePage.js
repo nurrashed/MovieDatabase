@@ -16,7 +16,6 @@ export default function MoviePage() {
   const genreforAPICall = useGenre(selectedGenres)
 
   const fetchMovies = async () => {
-    console.log("genreforAPICall: ", genreforAPICall)
     setIsLoading(true)
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforAPICall}`

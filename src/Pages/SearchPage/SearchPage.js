@@ -5,19 +5,17 @@ import "./add.css";
 
 export default function SearchPage() {
   const [page, setPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(); 
-  const [numberOfPagesSimilarMovies, setNumberOfPagesSimilarMovies] = useState();
+  const [numberOfPages, setNumberOfPages] = useState();
   const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [selectedMovieId, setSelectedMovieId] = useState("");
   const [overview, setOverview] = useState("");
   const [similarMovies, setSimilarMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
   const Search_API = `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=`;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    /* searchMovies(Search_API, searchText); */
     setSearchText("");
   };
 
@@ -44,7 +42,6 @@ export default function SearchPage() {
 
   const overviewShow = (e) => {
     window.scroll(0, 0);
-    setSelectedMovieId(e.target.id);
     setOverview(e.target.dataset.value);
     getSimilarMovies(e.target.id);
 
@@ -55,7 +52,6 @@ export default function SearchPage() {
     }); */
   };
 
-  console.log(selectedMovieId);
 
   const getSimilarMovies = (selectedMovieId) => {
     fetch(
@@ -64,9 +60,6 @@ export default function SearchPage() {
       .then((res) => res.json())
       .then((data) => {
         setSimilarMovies(data.results);
-        setNumberOfPagesSimilarMovies(data.total_pages);
-        console.log(numberOfPagesSimilarMovies)
-
       });
   };
 

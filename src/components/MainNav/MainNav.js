@@ -23,9 +23,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigation
         showLabels
         value={value}
-        onChange={(event, newValue) => {
-          console.log("newValue: ", newValue)
-          setValue(newValue);
+        onChange={(event, newValue) => {          setValue(newValue);
         }}
         style={{ backgroundColor: "#101010" }}
       >
