@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import classes from "./Genres.module.css";
+import Box from "@mui/material/Box";
 import { Chip } from "@material-ui/core";
 /* import Chip from '@mui/material/Chip'; */
 
@@ -46,7 +47,7 @@ export default function Genres({
 
   return (
     <>
-      <div className={classes['genre-style']}>
+      <Box sx ={{margin: "4px 6px"}}>
         {selectedGenres &&
           selectedGenres.map((genre) => (
             <Chip
@@ -73,7 +74,7 @@ export default function Genres({
               onClick={() => addGenreToSelectedGenre(genre)}
             />
           ))}
-      </div>
+      </Box>
     </>
   );
 }

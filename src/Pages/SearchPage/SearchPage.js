@@ -5,6 +5,8 @@ import "./add.css";
 
 export default function SearchPage() {
   const [page, setPage] = useState(1);
+  const [numberOfPages, setNumberOfPages] = useState(); 
+  const [numberOfPagesSimilarMovies, setNumberOfPagesSimilarMovies] = useState();
   const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [selectedMovieId, setSelectedMovieId] = useState("");
@@ -23,8 +25,9 @@ export default function SearchPage() {
     
     setIsLoading(true);
     const response = await fetch(Search_API + searchText);
-    const data = await response.json();  
+    const data = await response.json();
     setMovies(data.results);
+    setNumberOfPages(data.total_pages);
     setIsLoading(false);   
   };
 
@@ -61,6 +64,9 @@ export default function SearchPage() {
       .then((res) => res.json())
       .then((data) => {
         setSimilarMovies(data.results);
+        setNumberOfPagesSimilarMovies(data.total_pages);
+        console.log(numberOfPagesSimilarMovies)
+
       });
   };
 
@@ -118,13 +124,13 @@ export default function SearchPage() {
               ))}
             </div>
           )}
-          {similarMovies.length === 0 && <p>No Similar movies found</p>}
+          {similarMovies.length === 0 && <p>No Similar movies found</p>}         
             <button onClick={clearScreen}>
               Clear Overview and similar movie list
             </button>
         </div>
       </div>
-      {<CustomPagination setPage={setPage} />}
+      {numberOfPages > 1 && <CustomPagination setPage={setPage} numberOfPages={numberOfPages}/>}
     </div>
   );
 }

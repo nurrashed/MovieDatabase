@@ -3,7 +3,11 @@ const useGenre = (selectedGenres) =>{
 
     else {
         const GenreId = selectedGenres.map(genre => genre.id);
-        return GenreId.reduce((acc, curr) => acc + ',' + curr);
+        console.log("Genre Id: ", GenreId)
+        return GenreId.reduce(function (acc, curr) { 
+            console.log("Acc: ", acc + "," , "Current: ", curr);
+            return acc + ',' + curr;
+        });
     }
 }
 

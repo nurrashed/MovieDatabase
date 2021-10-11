@@ -7,14 +7,15 @@ export default function MovieCard({
   id,
   poster,
   title,
-  overview,
   date,
   vote_average,
-  media_type
 }) {
   return (
     <div className={classes.media}>
-        <Badge badgeContent={vote_average} color={vote_average >= 7 ? 'primary' : 'secondary' }/>
+      <Badge
+        badgeContent={vote_average}
+        color={vote_average >= 7 ? "primary" : "secondary"}
+      />
       <img
         className={classes.poster}
         src={poster ? `${img_300}/${poster}` : unavailable}
@@ -23,6 +24,5 @@ export default function MovieCard({
       <b className={classes.title}>{title}</b>
       <div className={classes.subTitle}>{date}</div>
     </div>
-    
   );
 }
