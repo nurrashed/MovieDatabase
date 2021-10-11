@@ -12,17 +12,17 @@ export default function SearchPage() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   
-  const Search_API = `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=`;
+  const Search_API = `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=${searchText}`;
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
     setSearchText("");
   };
 
-  const searchMovies = async (Search_API, searchText) => {
+  const searchMovies = async (Search_API) => {
     
     setIsLoading(true);
-    const response = await fetch(Search_API + searchText);
+    const response = await fetch(Search_API );
     const data = await response.json();
     setMovies(data.results);
     setNumberOfPages(data.total_pages);
@@ -31,13 +31,13 @@ export default function SearchPage() {
 
   useEffect(() => {
     window.scroll(0, 0);
-    searchMovies(Search_API, searchText);    
+    if(searchText.length > 1) searchMovies(Search_API);    
     // eslint-disable-next-line
-  }, [page]);
+  }, [searchText, page]);
 
   const handleOnChange = (e) => {
     setSearchText(e.target.value);
-    searchMovies(Search_API, searchText);
+    if(searchText.length >= 1) searchMovies(Search_API);
   };
 
   const overviewShow = (e) => {
