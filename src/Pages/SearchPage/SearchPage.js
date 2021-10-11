@@ -11,7 +11,7 @@ export default function SearchPage() {
   const [overview, setOverview] = useState("");
   const [similarMovies, setSimilarMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const Search_API = `https://api.themoviedb.org/3/search/movie?api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US&page=${page}&include_adult=false&query=${searchText}`;
 
   const handleOnSubmit = (event) => {
@@ -20,24 +20,23 @@ export default function SearchPage() {
   };
 
   const searchMovies = async (Search_API) => {
-    
     setIsLoading(true);
-    const response = await fetch(Search_API );
+    const response = await fetch(Search_API);
     const data = await response.json();
     setMovies(data.results);
     setNumberOfPages(data.total_pages);
-    setIsLoading(false);   
+    setIsLoading(false);
   };
 
   useEffect(() => {
     window.scroll(0, 0);
-    if(searchText.length > 1) searchMovies(Search_API);    
+    if (searchText.length >= 1) searchMovies(Search_API);
     // eslint-disable-next-line
   }, [searchText, page]);
 
   const handleOnChange = (e) => {
     setSearchText(e.target.value);
-    if(searchText.length >= 1) searchMovies(Search_API);
+    if (searchText.length >= 1) searchMovies(Search_API);
   };
 
   const overviewShow = (e) => {
@@ -51,7 +50,6 @@ export default function SearchPage() {
       }
     }); */
   };
-
 
   const getSimilarMovies = (selectedMovieId) => {
     fetch(
@@ -85,7 +83,8 @@ export default function SearchPage() {
               </form>
             </div>
             <div className={classes["movie-container"]}>
-              {!isLoading && movies  &&
+              {!isLoading &&
+                movies &&
                 movies.map((movie) => (
                   <div
                     key={movie.id}
@@ -96,17 +95,13 @@ export default function SearchPage() {
                     {movie.title}
                   </div>
                 ))}
-                {isLoading && <p>Loading....</p>}
+              {isLoading && <p>Loading....</p>}
             </div>
           </div>
         </div>
         <div className={classes["right-side"]}>
-        <h3>Movie Overview</h3>
-          {overview && (
-            <div className={classes["overview"]}>
-              {overview}
-            </div>
-          )}
+          <h3>Movie Overview</h3>
+          {overview && <div className={classes["overview"]}>{overview}</div>}
           {!overview && <p>No overview to show!</p>}
 
           <h3>Similar Movies</h3>
@@ -117,13 +112,15 @@ export default function SearchPage() {
               ))}
             </div>
           )}
-          {similarMovies.length === 0 && <p>No Similar movies found</p>}         
-            <button onClick={clearScreen}>
-              Clear Overview and similar movie list
-            </button>
+          {similarMovies.length === 0 && <p>No Similar movies found</p>}
+          <button onClick={clearScreen}>
+            Clear Overview and similar movie list
+          </button>
         </div>
       </div>
-      {numberOfPages > 1 && <CustomPagination setPage={setPage} numberOfPages={numberOfPages}/>}
+      {numberOfPages > 1 && (
+        <CustomPagination setPage={setPage} numberOfPages={numberOfPages} />
+      )}
     </div>
   );
 }
